@@ -4,6 +4,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { appRoutes } from "./Navigation/routes";
 
 import Spinner from "./Services/Spinner";
+import PageNotFound from "./Services/NotFound";
 // containers
 const AppLayout = lazy(() => import("./Navigation/Layout/AppLayout"));
 
@@ -25,6 +26,7 @@ function App() {
                 />
               ) : null;
             })}
+            <Route exact path="*" name="404" element={<PageNotFound />} />
           </Routes>
         </Suspense>
       </BrowserRouter>
