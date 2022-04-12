@@ -1,23 +1,35 @@
-import logo from './logo.svg';
-import './App.css';
+// import "./App.css";
+import { lazy, Suspense } from "react";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { appRoutes } from "./Navigation/routes";
+
+import Spinner from "./Services/Spinner";
+
+// containers
+const AppLayout = lazy(() => import("./Navigation/Layout/AppLayout"));
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <BrowserRouter>
+        <Suspense fallback={<Spinner />}>
+          <Routes>
+            {appRoutes.map((route, idx) => {
+              console.log(route);
+              return route.component ? (
+                <Route
+                  key={idx}
+                  path={route.path}
+                  exact={route.exact}
+                  name={route.name}
+                  element={<AppLayout />}
+                />
+              ) : null;
+            })}
+          </Routes>
+        </Suspense>
+      </BrowserRouter>
+      hi
     </div>
   );
 }
