@@ -4,7 +4,6 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { appRoutes } from "./Navigation/routes";
 
 import Spinner from "./Services/Spinner";
-
 // containers
 const AppLayout = lazy(() => import("./Navigation/Layout/AppLayout"));
 
@@ -29,7 +28,6 @@ function App() {
           </Routes>
         </Suspense>
       </BrowserRouter>
-      hi
     </div>
   );
 }
