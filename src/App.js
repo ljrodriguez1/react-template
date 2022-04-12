@@ -1,4 +1,4 @@
-// import "./App.css";
+import "./App.css";
 import { lazy, Suspense } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { appRoutes } from "./Navigation/routes";
@@ -9,7 +9,7 @@ const AppLayout = lazy(() => import("./Navigation/Layout/AppLayout"));
 
 function App() {
   return (
-    <div>
+    <div className="root">
       <BrowserRouter>
         <Suspense fallback={<Spinner />}>
           <Routes>
