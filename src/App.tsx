@@ -16,17 +16,11 @@ function App() {
           <Routes>
             {appRoutes.map((route, idx) => {
               console.log(route);
-              return route.component ? (
-                <Route
-                  key={idx}
-                  path={route.path}
-                  exact={route.exact}
-                  name={route.name}
-                  element={<AppLayout />}
-                />
-              ) : null;
+              return (
+                <Route key={idx} path={route.path} element={<AppLayout />} />
+              );
             })}
-            <Route exact path="*" name="404" element={<PageNotFound />} />
+            <Route path="*" element={<PageNotFound />} />
           </Routes>
         </Suspense>
       </BrowserRouter>

@@ -1,7 +1,12 @@
 import { useState, useEffect } from "react";
 
-export default useUserData = (userId) => {
-  const [user, setUser] = useState(null);
+export interface User {
+  name: string;
+  email: string;
+}
+
+export default function useUserData(userId: string) {
+  const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -12,4 +17,4 @@ export default useUserData = (userId) => {
   }, [userId]);
 
   return { user, loading };
-};
+}

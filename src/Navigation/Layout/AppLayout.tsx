@@ -15,8 +15,6 @@ const AppLayout = function () {
               <Route
                 key={idx}
                 path={route.path}
-                exact={route.exact}
-                name={route.name}
                 element={<route.component />}
               />
             ) : null;
