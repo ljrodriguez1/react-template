@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 
+import { user as userData } from "./placeholders";
+
 export interface User {
   name: string;
   email: string;
@@ -11,7 +13,7 @@ export default function useUserData(userId: string) {
 
   useEffect(() => {
     const fetchUser = async () => {
-      setUser({ name: "John Doe", email: "jhon@gmail.com" });
+      setUser(userData);
     };
     fetchUser().finally(() => setLoading(false));
   }, [userId]);

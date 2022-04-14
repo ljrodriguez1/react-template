@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 
+import { coupon } from "./placeholders";
+
 export interface Coupon {
   id: number;
   code: string;
@@ -24,11 +26,4 @@ export const useUsedCoupons = () => {
   }, []);
 
   return { usedCoupons, loading };
-};
-
-const coupon = {
-  id: 1,
-  code: "SACATEUN7",
-  discount: 0.2,
-  category: "fruit",
 };
