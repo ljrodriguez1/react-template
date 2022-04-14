@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import useSWR from "swr";
 
 import { products as productsData } from "./placeholders";
 
@@ -17,16 +17,16 @@ export interface Product {
 }
 
 export const useProductsData = () => {
-  const [products, setProducts] = useState<Product[]>([]);
-  const [loading, setLoading] = useState(true);
+  const { data, error } = useSWR("/api/products", fetchProducts, {
+    suspense: true,
+  });
 
-  useEffect(() => {
-    const fetchProducts = async () => {
-      await sleep(1000);
-      setProducts(productsData);
-    };
-    fetchProducts().finally(() => setLoading(false));
-  }, []);
+  const products = data as Product[];
 
-  return { products, loading };
+  return { products, error };
+};
+
+const fetchProducts = async () => {
+  await sleep(1000);
+  return productsData;
 };
