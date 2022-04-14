@@ -9,6 +9,7 @@ export function ProductDisplay({ product }: Props) {
     <>
       <div>{product.name}</div>
       <div>{product.category}</div>
+      <div>{product.qty}</div>
     </>
   );
 }
