@@ -11,13 +11,18 @@ const AppLayout = function () {
       <Suspense fallback={<Spinner />}>
         <Routes>
           {appRoutes.map((route, idx) => {
-            return route.component ? (
+            console.log(route);
+            return (
               <Route
                 key={idx}
                 path={route.path}
-                element={<route.component />}
+                element={
+                  <Suspense fallback={<Spinner />}>
+                    <route.component />
+                  </Suspense>
+                }
               />
-            ) : null;
+            );
           })}
         </Routes>
       </Suspense>

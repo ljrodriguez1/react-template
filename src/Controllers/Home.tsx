@@ -1,8 +1,8 @@
-import { useProductsData } from "../Data/products";
-import ProductsList from "../Components/Products/ProductsList";
+import HistoryList from "../Components/History/HistoryList";
+import { useHistoryData } from "../Data/history";
 
 export default function Home() {
-  const { products } = useProductsData();
+  const { history } = useHistoryData();
 
-  return <ProductsList products={products}></ProductsList>;
+  return <HistoryList history={history}></HistoryList>;
 }

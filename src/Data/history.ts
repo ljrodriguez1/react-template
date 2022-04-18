@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import useSWR from "swr";
 
 import { Coupon } from "./usedCoupons";
 
@@ -12,13 +12,15 @@ export interface Product {
   description: string;
   price: number;
   qty: number;
+  image: string;
 }
 
-interface History {
+export interface History {
   products: Product[];
   id: number;
   coupon: Coupon;
   total: number;
+  date: Date;
 }
 
 function sleep(ms: number) {
@@ -26,16 +28,31 @@ function sleep(ms: number) {
 }
 
 export const useHistoryData = () => {
-  const [history, setHistory] = useState<History[]>([]);
-  const [loading, setLoading] = useState(true);
+  const { data, error } = useSWR("/api/history", fetchProducts, {
+    suspense: true,
+  });
 
-  useEffect(() => {
-    const fetchProducts = async () => {
-      await sleep(1000);
-      setHistory(historyData);
-    };
-    fetchProducts().finally(() => setLoading(false));
-  }, []);
+  const history = data as History[];
 
-  return { history, loading };
+  return { history, error };
+};
+
+const fetchProducts = async () => {
+  await sleep(1000);
+  return historyData;
+};
+
+export const useOrderData = ({ orderId }: { orderId: number }) => {
+  const { data, error } = useSWR(`/api/history/${orderId}`, fetchProduct, {
+    suspense: true,
+  });
+
+  const order = data as History;
+
+  return { order, error };
+};
+
+const fetchProduct = async () => {
+  await sleep(1000);
+  return historyData[0];
 };
